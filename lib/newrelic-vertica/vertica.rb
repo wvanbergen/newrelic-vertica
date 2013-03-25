@@ -21,6 +21,7 @@ module NewRelic
 
           if NewRelic::Agent.is_execution_traced?
             NewRelic::Agent.instance.transaction_sampler.notice_sql(sql, nil, duration)
+            NewRelic::Agent.instance.stats_engine.get_stats_no_scope('ActiveRecord/all').trace_call(duration)
           end
 
           return result
