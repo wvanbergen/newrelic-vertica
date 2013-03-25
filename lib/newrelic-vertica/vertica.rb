@@ -32,12 +32,10 @@ end
 
 DependencyDetection.defer do
   depends_on do
-    p 'checking dependencies'
     defined?(::Vertica) && defined?(::Vertica::Connection)
   end
 
   executes do
-    p 'installing newrelic extention'
     ::Vertica::Connection.instance_eval do
       include ::NewRelic::Agent::Instrumentation::VerticaInstrumentation
     end
